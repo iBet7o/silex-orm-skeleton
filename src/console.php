@@ -8,9 +8,8 @@ use Symfony\Component\Console\Input\InputOption;
 
 $console = new Application('App', 'n/a');
 
-$console->setHelperSet(new Symfony\Component\Console\Helper\HelperSet(array(
-    'em' => new \Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper($app["db.orm.em"])
-)));
+$HelperSet = $console->getHelperSet();
+$HelperSet->set(new \Doctrine\ORM\Tools\Console\Helper\EntityManagerHelper($app["db.orm.em"]), 'em');
 
 $console->addCommands(array(
     new \Doctrine\ORM\Tools\Console\Command\ClearCache\MetadataCommand,
